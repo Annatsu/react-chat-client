@@ -1,18 +1,27 @@
 // React
 import React from 'react';
+import PropTypes from 'prop-types';
 import './Message.css';
 
 
 
 const Message = ({
     className = '',
-    children,
+    owner,
+    content,
     ...rest
 }) => (
-    <li className={`chat-message ${className}`} {...rest}>
-        {children}
-    </li>
+    <div className={`chat-message ${className}`} {...rest}>
+        <h4>{owner}</h4>
+        <p>{content}</p>
+    </div>
 );
+
+
+Message.propTypes = {
+    owner: PropTypes.string.isRequired,
+    content: PropTypes.string.isRequired,
+};
 
 
 
