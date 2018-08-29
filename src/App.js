@@ -27,7 +27,12 @@ class App extends Component {
 
         // Setups a socket listener for new messages
         socket.on('newMessage', (msg) => {
-            alert('msg' + msg)
+            this.setState((prevState) => ({
+                messages: prevState.messages.concat({
+                    user: msg.user,
+                    content: msg.body,
+                })
+            }));
         });
     }
 
