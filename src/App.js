@@ -38,6 +38,7 @@ class App extends Component {
             }));
         });
 
+
         // Setup a listener for users being connected
         this.socket.on('userConnected', ({ username }) => {
             this.setState((prevState) => ({
@@ -51,6 +52,15 @@ class App extends Component {
             this.setState((prevState) => ({
                 users: prevState.users.filter((user) => user !== username)
             }));
+        });
+
+
+        // Setup a listener for when the user has been logged in
+        this.socket.on('login', ({ users }) => {
+            this.setState({
+                users,
+                userAuthenticated: true
+            });
         });
     }
 
