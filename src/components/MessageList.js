@@ -1,6 +1,7 @@
 // React
 import React from 'react';
 import PropTypes from 'prop-types';
+import './MessageList.css';
 
 
 // Custom Components
