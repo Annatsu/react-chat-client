@@ -1,31 +1,33 @@
 // React
 import React, { Component } from 'react';
 
+
 // Socket.io
 import io from 'socket.io-client';
 
 
-// Custom Components
-import AppContainer, { ChatContainer, UsersContainer } from './components/Container';
-import MessageList from './components/MessageList';
-import UserList from './components/UsersList';
-import InputBox from './components/InputBox';
-
+// Components
+import AuthenticatedApp from './AuthenticatedApp';
+import SignUp from './SignUp';
 
 
 class App extends Component {
 
-    state = {
-        messages: [],
-        users: []
+    constructor() {
+        super();
+
+        // Creates a Socket.io instance.
+        this.socket = io();
+        this.initListeners();
+
+        this.state = {
+            userAuthenticated: false,
+            messages: [],
+            users: [],
+        };
     }
 
-
-    componentDidMount() {
-        // Creates an Socket.io instance.
-        this.socket = io();
-
-
+    initListeners() {
         // Setup a socket listener for incoming messages
         this.socket.on('newMessage', (msg) => {
             this.setState((prevState) => ({
@@ -37,14 +39,15 @@ class App extends Component {
         });
 
         // Setup a listener for users being connected
-        this.socket.on('userConnected', (username) => {
+        this.socket.on('userConnected', ({ username }) => {
             this.setState((prevState) => ({
                 users: prevState.users.concat(username)
             }));
         });
 
+
         // Setup a listener for users being disconnected
-        this.socket.on('userDisconnected', (username) => {
+        this.socket.on('userDisconnected', ({ username }) => {
             this.setState((prevState) => ({
                 users: prevState.users.filter((user) => user !== username)
             }));
@@ -58,19 +61,18 @@ class App extends Component {
 
 
     render() {
-        const { messages, users } = this.state;
+        const { userAuthenticated, users, messages } = this.state;
 
-        return (
-            <AppContainer>
-                <ChatContainer>
-                    <MessageList messages={messages} />
-                    <InputBox onSubmit={this.sendMessage} />
-                </ChatContainer>
-                <UsersContainer>
-                    <UserList users={users} />
-                </UsersContainer>
-            </AppContainer>
-        );
+        if (userAuthenticated)
+            return (
+                <AuthenticatedApp
+                    socket={this.socket}
+                    users={users}
+                    messages={messages}
+                    onSendMessage={this.sendMessage} />
+            );
+        else
+            return <SignUp socket={this.socket} />
     }
 
 }
