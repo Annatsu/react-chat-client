@@ -1,13 +1,15 @@
 div.app-container {
     display: flex;
-    padding: 20px;
-    background-color: #3a3a3a;
+    background-color: #36393f;
 }
 
 div.chat-container {
     flex: 8;
+    padding: 20px;
 }
 
 div.users-container {
     flex: 2;
+    background-color: #2f3136;
+    padding: 20px;
 }
