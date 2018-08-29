@@ -7,8 +7,7 @@ import io from 'socket.io-client';
 
 // Custom Components
 import AppContainer, { ChatContainer, UsersContainer } from './components/Container';
-import MessageContainer from './components/MessageContainer';
-import Message from './components/Message';
+import MessageList from './components/MessageList';
 
 
 
@@ -41,11 +40,7 @@ class App extends Component {
         return (
             <AppContainer>
                 <ChatContainer>
-                    {messages.map((msg, i) => (
-                        <MessageContainer key={i} username={msg.user}>
-                            <Message>{msg.content}</Message>
-                        </MessageContainer>
-                    ))}
+                    <MessageList messages={messages} />
                 </ChatContainer>
                 <UsersContainer>
 
