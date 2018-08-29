@@ -9,6 +9,7 @@ import io from 'socket.io-client';
 import AppContainer, { ChatContainer, UsersContainer } from './components/Container';
 import MessageList from './components/MessageList';
 import UserList from './components/UsersList';
+import InputBox from './components/InputBox';
 
 
 
@@ -51,6 +52,11 @@ class App extends Component {
     }
 
 
+    sendMessage = (message) => {
+        this.socket.emit('sendMessage', message);
+    }
+
+
     render() {
         const { messages, users } = this.state;
 
@@ -58,6 +64,7 @@ class App extends Component {
             <AppContainer>
                 <ChatContainer>
                     <MessageList messages={messages} />
+                    <InputBox onSubmit={this.sendMessage} />
                 </ChatContainer>
                 <UsersContainer>
                     <UserList users={users} />
