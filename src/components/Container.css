@@ -1,0 +1,13 @@
+div.app-container {
+    display: flex;
+    padding: 20px;
+    background-color: #3a3a3a;
+}
+
+div.chat-container {
+    flex: 8;
+}
+
+div.users-container {
+    flex: 2;
+}
