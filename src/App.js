@@ -6,6 +6,7 @@ import io from 'socket.io-client';
 
 
 // Custom Components
+import AppContainer, { ChatContainer, UsersContainer } from './components/Container';
 import MessageContainer from './components/MessageContainer';
 import Message from './components/Message';
 
@@ -38,13 +39,18 @@ class App extends Component {
         const { messages } = this.state;
 
         return (
-            <div>
-                {messages.map((msg, i) => (
-                    <MessageContainer key={i} username={msg.user}>
-                        <Message>{msg.content}</Message>
-                    </MessageContainer>
-                ))}
-            </div>
+            <AppContainer>
+                <ChatContainer>
+                    {messages.map((msg, i) => (
+                        <MessageContainer key={i} username={msg.user}>
+                            <Message>{msg.content}</Message>
+                        </MessageContainer>
+                    ))}
+                </ChatContainer>
+                <UsersContainer>
+
+                </UsersContainer>
+            </AppContainer>
         );
     }
 
