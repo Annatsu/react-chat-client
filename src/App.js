@@ -76,7 +76,6 @@ class App extends Component {
         if (userAuthenticated)
             return (
                 <AuthenticatedApp
-                    socket={this.socket}
                     users={users}
                     messages={messages}
                     onSendMessage={this.sendMessage} />
