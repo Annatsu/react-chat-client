@@ -1,6 +1,7 @@
 // React
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import './InputBox.css';
 
 
 
@@ -20,11 +21,19 @@ class InputBox extends Component {
 
 
     render() {
+        const {
+            children,
+            className = '',
+            ...rest
+        } = this.props;
+
         return (
             <input
                 type="text"
+                className={`chat-input-box ${className}`}
                 ref={(elem) => this.inputRef = elem}
-                onKeyUp={this.onKeyUp} />
+                onKeyUp={this.onKeyUp}
+                {...rest} />
         );
     }
 
