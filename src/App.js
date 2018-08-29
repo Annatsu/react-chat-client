@@ -8,6 +8,7 @@ import io from 'socket.io-client';
 // Custom Components
 import AppContainer, { ChatContainer, UsersContainer } from './components/Container';
 import MessageList from './components/MessageList';
+import UserList from './components/UsersList';
 
 
 
@@ -18,7 +19,8 @@ class App extends Component {
             { user: 'Annatsu', content: 'Hello guys!' },
             { user: 'Qu4dr4tus', content: 'Hi, howza goin?' },
             { user: 'Hipnode', content: 'typing...' }
-        ]
+        ],
+        users: [ 'Annatsu', 'Qu4dr4tus', 'Hipnode' ]
     }
 
 
@@ -35,7 +37,7 @@ class App extends Component {
 
 
     render() {
-        const { messages } = this.state;
+        const { messages, users } = this.state;
 
         return (
             <AppContainer>
@@ -43,7 +45,7 @@ class App extends Component {
                     <MessageList messages={messages} />
                 </ChatContainer>
                 <UsersContainer>
-
+                    <UserList users={users} />
                 </UsersContainer>
             </AppContainer>
         );
