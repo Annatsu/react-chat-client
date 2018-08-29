@@ -22,16 +22,30 @@ class App extends Component {
 
     componentDidMount() {
         // Creates an Socket.io instance.
-        const socket = io();
+        this.socket = io();
 
 
-        // Setups a socket listener for new messages
-        socket.on('newMessage', (msg) => {
+        // Setup a socket listener for incoming messages
+        this.socket.on('newMessage', (msg) => {
             this.setState((prevState) => ({
                 messages: prevState.messages.concat({
                     user: msg.user,
                     content: msg.body,
                 })
+            }));
+        });
+
+        // Setup a listener for users being connected
+        this.socket.on('userConnected', (username) => {
+            this.setState((prevState) => ({
+                users: prevState.users.concat(username)
+            }));
+        });
+
+        // Setup a listener for users being disconnected
+        this.socket.on('userDisconnected', (username) => {
+            this.setState((prevState) => ({
+                users: prevState.users.filter((user) => user !== username)
             }));
         });
     }
