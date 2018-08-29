@@ -15,12 +15,8 @@ import UserList from './components/UsersList';
 class App extends Component {
 
     state = {
-        messages: [
-            { user: 'Annatsu', content: 'Hello guys!' },
-            { user: 'Qu4dr4tus', content: 'Hi, howza goin?' },
-            { user: 'Hipnode', content: 'typing...' }
-        ],
-        users: [ 'Annatsu', 'Qu4dr4tus', 'Hipnode' ]
+        messages: [],
+        users: []
     }
 
 
